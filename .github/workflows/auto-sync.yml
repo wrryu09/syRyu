@@ -27,7 +27,7 @@ jobs:
 
       - name: Add remote URL
         run: |
-          git remote add forked_repo https://wrryu09:${{ secrets.AUTO_SYNC }}@github.com/wrryu09/syRyu
+          git remote add forked_repo https://wrryu09:${{ secrets.FORKED_REPO_SYNC }}@github.com/wrryu09/syRyu
           git config user.name wrryu09
           git config user.email rryu09@ewhain.net
 
