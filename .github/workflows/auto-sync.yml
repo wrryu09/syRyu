@@ -1,40 +1,40 @@
-// auto-sync.yml
-name: Synchronize to forked repo
-	on:
-	  push:
-	    branches:
-	      - main
+name: Auto Sync
+on:
+  push:
+    branches:
+      - main
 
-	jobs:
-	  sync:
-	    name: Sync forked repo
-	    runs-on: ubuntu-latest
+jobs:
+  sync:
+    name: Sync forked repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.AUTO_SYNC }}
 
-	    steps:
-	      - name: Checkout main // 레포지토리 코드 체크아웃 (코드 가져오기)
-	        uses: actions/checkout@v4 // actions 가져오기
-        
-	      - name: Use Node.js // 해당 환경을 Node.js에서 실행하겠다고 명시
-	        uses: actions/setup-node@v4 // actions 가져오기
-	        with:
-	          node-version: 21.4.0 // 자신의 node 버전 확인하여 기입
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21.4.0
 
-	      - name: Install dependencies // 의존성 설치
-	        run: yarn install
+      - name: Install dependencies
+        run: yarn install
 
-	      - name: Build project // 빌드
-	        run: yarn run build
+      - name: Build project
+        run: yarn run build
 
-	      - name: Add remote-url // 자신의 포크 레포 주소 remote 연결
-	        run: |
-	          git remote add forked-repo https://[깃헙이름]:${{ secrets.FORKED_REPO_TOKEN }}@github.com/[깃헙이름]/[개인 레포지토리명]
-	          git config user.name [깃헙 이름]
-	          git config user.email [깃헙 이메일]
-      
-	      - name: Push changes to forked-repo // 포크 레포에 push
-	        run: |
-	          git push -f forked-repo main
-      
-	      - name: Clean up // 푸시 후 remote-url 에서 삭제
-	        run: |
-	          git remote remove forked-repo
+      - name: Add remote URL
+        run: |
+          git remote add forked_repo https://wrryu09:${{ secrets.AUTO_SYNC }}@github.com/wrryu09/syRyu
+          git config user.name wrryu09
+          git config user.email rryu09@ewhain.net
+
+      - name: Push Changes to forked_repo
+        run: |
+          git push -f forked_repo main
+
+      - name: Clean up
+        run: |
+          git remote remove forked_repo
