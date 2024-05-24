@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.AUTO_SYNC }}
+          token: ${{ secrets.FORKED_REPO_SYNC }}
 
       - name: Use Node.js
         uses: actions/setup-node@v4
