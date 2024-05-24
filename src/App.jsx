@@ -6,7 +6,7 @@ function App() {
     <>
       <h1>
         {import.meta.env.VITE_MY_NAME} 
-        <p>테스트</p>
+        <p>숨심스 짱~</p>
       </h1>
     </>
   );
